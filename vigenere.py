@@ -2,12 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import string
+from string import *
 
-from string import ascii_lowercase # liste des lettres de l'alphabet en minuscule
+message_clair_a_coder  = "Message Clair"
+message_code_a_decoder = "Opwulkg Gnlmt"
+cle                    = "Cle"
 
 # ----------------------------
 # FONCTIONS DE TEST
 # ----------------------------
+
 def testerVigenere():
     titres = [ \
         "Grille de Vigenere :", \
@@ -26,43 +30,39 @@ def testerVigenere():
         ]
 
     for titre, test in map(None, titres, tests):
-        print
-        print titre
+        afficherTitre(titre)
         test()
 
-    print "Tests OK"
+    afficherTitre("Tests OK")
+
+def afficherTitre(titre):
+    print
+    print "-----------------------"
+    print titre
+    print "-----------------------"
+    print
 
 def testerCodageLettre():
-    message_clair = "message clair"
-    cle = "cle"
-    for index in range(len(message_clair)):
-        lettre_claire = message_clair[index]
+    for index in range(len(message_clair_a_coder)):
+        lettre_claire = message_clair_a_coder[index]
         lettre_cle    = cle[index % len(cle)]
         lettre_codee  = coderLettre(lettre_cle, lettre_claire)
         print lettre_claire, lettre_cle, lettre_codee
 
 def testerDecodageLettre():
-    message_code = "opwulkg gnlmt"
-    cle = "cle"
-    for index in range(len(message_code)):
-        lettre_codee  = message_code[index]
+    for index in range(len(message_code_a_decoder)):
+        lettre_codee  = message_code_a_decoder[index]
         lettre_cle    = cle[index % len(cle)]
         lettre_claire = decoderLettre(lettre_cle, lettre_codee)
         print lettre_codee, lettre_cle, lettre_claire
 
 def testerCodageMessage():
-    message_clair = "message clair"
-    cle = "cle"
-    print message_clair, " : ", message_clair
-    print cle, " : ", cle
-    print "message code : ", coderMessage(cle, message_clair)
+    print "Message clair :", message_clair_a_coder
+    print "Message code  :", coderMessage(cle, message_clair_a_coder)
 
 def testerDecodageMessage():
-    message_code = "opwulkg gnlmt"
-    cle = "cle"
-    print message_code, " : ", message_code
-    print cle, " : ", cle
-    print "message clair : ", decoderMessage(cle, message_code)
+    print "Message code  :", message_code_a_decoder
+    print "Message clair :", decoderMessage(cle, message_code_a_decoder)
 
 # ----------------------------
 # FONCTIONS DE VIGENERE
@@ -71,27 +71,33 @@ def testerDecodageMessage():
 def afficherGrille():
     # première ligne
     print ' ',
-    for l in ascii_lowercase :
-        print l.upper(),
+    for l in ascii_uppercase :
+        print l,
     print
     # grille
     for cle in ascii_lowercase:
-        print cle.upper(), # premier caractère
+        print cle.upper(),
         for lettre in ascii_lowercase:
             print coderLettre(cle, lettre),
         print
 
 def coderLettre(cle, lettre):
-    if string.find(ascii_lowercase, lettre) > -1:
-        index = string.find(ascii_lowercase, lettre) + string.find(ascii_lowercase, cle)
-        return ascii_lowercase[index % len(ascii_lowercase)]
+    if string.find(ascii_letters, lettre) > -1:
+        index = string.find(ascii_lowercase, lettre.lower()) + string.find(ascii_lowercase, cle.lower())
+        if(lettre.isupper()):
+            return ascii_uppercase[index % len(ascii_uppercase)]
+        else:
+            return ascii_lowercase[index % len(ascii_lowercase)]
     else:
         return lettre
 
 def decoderLettre(cle, lettre):
-    if string.find(ascii_lowercase, lettre) > -1:
-        index = string.find(ascii_lowercase, lettre) - string.find(ascii_lowercase, cle)
-        return ascii_lowercase[index % len(ascii_lowercase)]
+    if string.find(ascii_letters, lettre) > -1:
+        index = string.find(ascii_lowercase, lettre.lower()) - string.find(ascii_lowercase, cle.lower())
+        if(lettre.isupper()):
+            return ascii_uppercase[index % len(ascii_uppercase)]
+        else:
+            return ascii_lowercase[index % len(ascii_lowercase)]
     else:
         return lettre
 
