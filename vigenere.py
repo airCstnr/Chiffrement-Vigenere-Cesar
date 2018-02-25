@@ -9,22 +9,27 @@ from string import ascii_lowercase # liste des lettres de l'alphabet en minuscul
 # FONCTIONS DE TEST
 # ----------------------------
 def testerVigenere():
-    print
-    print "Grille de Vigenere :"
-    afficherGrille()
-    print
-    print "Test de Codage de lettre :"
-    testerCodageLettre()
-    print
-    print "Test de Decodage de lettre :"
-    testerDecodageLettre()
-    print
-    print "Test de Codage de message :"
-    testerCodageMessage()
-    print
-    print "Test de Decodage de message :"
-    testerDecodageMessage()
-    print
+    titres = [ \
+        "Grille de Vigenere :", \
+        "Test de Codage de lettre :", \
+        "Test de Decodage de lettre :", \
+        "Test de Codage de message :", \
+        "Test de Decodage de message :"
+        ]
+
+    tests = [ \
+        afficherGrille, \
+        testerCodageLettre, \
+        testerDecodageLettre, \
+        testerCodageMessage, \
+        testerDecodageMessage
+        ]
+
+    for titre, test in map(None, titres, tests):
+        print
+        print titre
+        test()
+
     print "Tests OK"
 
 def testerCodageLettre():
