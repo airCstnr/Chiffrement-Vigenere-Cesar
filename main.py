@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from vigenere import *
+from test import *
 
 testerVigenere()
 
