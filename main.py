@@ -5,6 +5,9 @@ from vigenere import *
 from test import *
 
 cle = "PASSION"
-message_a_decoder = "Jn tsqgrg, msaa o gdul hzsasrw, ic'sfi-cw?\n" \
-"Mv grgmwfb tnxt v'mv drj pdma dets, mfm dedmwkas."
-print decoderMessage(cle, message_a_decoder)
+
+with open('message.txt') as f:
+    message_a_decoder = f.read()
+    message_clair = decoderMessage(cle, message_a_decoder)
+
+print message_clair
