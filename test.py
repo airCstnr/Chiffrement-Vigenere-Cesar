@@ -7,8 +7,8 @@ from string import *
 from vigenere import *
 
 
-message_clair_a_coder  = "Message Clair"
-message_code_a_decoder = "Opwulkg Gnlmt"
+message_clair_a_coder  = "Message Clair ',?-.!"
+message_code_a_decoder = "Opwulkg Npctv ',?-.!"
 cle                    = "Cle"
 
 # ----------------------------
@@ -46,25 +46,35 @@ def afficherTitre(titre):
     print
 
 def testerCodageLettre():
-    for index in range(len(message_clair_a_coder)):
-        lettre_claire = message_clair_a_coder[index]
-        lettre_cle    = cle[index % len(cle)]
-        lettre_codee  = coderLettre(lettre_cle, lettre_claire)
+    index_cle = 0
+    for lettre_claire in message_clair_a_coder:
+        if lettre_claire not in ascii_letters:
+            lettre_cle    = ' '
+            lettre_codee  = lettre_claire
+        else:
+            lettre_cle    = cle[index_cle % len(cle)]
+            lettre_codee  = coderLettre(lettre_cle, lettre_claire)
+            index_cle    += 1
         print lettre_claire, lettre_cle, lettre_codee
 
 def testerDecodageLettre():
-    for index in range(len(message_code_a_decoder)):
-        lettre_codee  = message_code_a_decoder[index]
-        lettre_cle    = cle[index % len(cle)]
-        lettre_claire = decoderLettre(lettre_cle, lettre_codee)
+    index_cle = 0
+    for lettre_codee in message_code_a_decoder:
+        if lettre_codee not in ascii_letters:
+            lettre_cle    = ' '
+            lettre_claire = lettre_codee
+        else:
+            lettre_cle    = cle[index_cle % len(cle)]
+            lettre_claire = decoderLettre(lettre_cle, lettre_codee)
+            index_cle    += 1
         print lettre_codee, lettre_cle, lettre_claire
 
 def testerCodageMessage():
     print "Message clair :", message_clair_a_coder
-    print "Message code  :", coderMessage(cle, message_clair_a_coder)
+    print "Message codé  :", coderMessage(cle, message_clair_a_coder)
 
 def testerDecodageMessage():
-    print "Message code  :", message_code_a_decoder
+    print "Message codé  :", message_code_a_decoder
     print "Message clair :", decoderMessage(cle, message_code_a_decoder)
 
 # ----------------------------
